@@ -11,4 +11,4 @@ my_string.o:my_string.c my_string.h
 vector.o:vector.c vector.h
 	$(CC) $(CFLAGS) -c vector.c -o vector.o
 clean:
-	rm string_driver $(OBJECTS) unit_test $(OBJECTS2)
+	rm string_driver $(OBJECTS)
