@@ -1,3 +1,11 @@
+//
+//  vector.h
+//  Labs
+//
+//  Created by Chris Ober on 6/21/17.
+//  Copyright © 2017 Chris Ober. All rights reserved.
+//
+
 #ifndef vector_h
 #define vector_h
 
@@ -24,5 +32,7 @@ int vector_value_search(Vector* pVector, char value);
 char vector_index_search(Vector* pVector, int index);
 
 Status vector_update(Vector* pVector, int index, int item);
+
+Status vector_resize(Vector* pVector);
 
 #endif /* vector_h */

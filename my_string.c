@@ -1,3 +1,11 @@
+//
+//  MY_STRING.c
+//  Labs
+//
+//  Created by Chris Ober on 6/21/17.
+//  Copyright © 2017 Chris Ober. All rights reserved.
+//
+
 #include "my_string.h"
 
 MY_STRING my_string_init_default(void)
@@ -57,9 +65,17 @@ int my_string_get_capacity(MY_STRING hMy_string)
 
 int my_string_get_size(MY_STRING hMy_string)
 {
+    int i = 0, stringLength = 0;
+    
     Vector* pVector = (Vector*) hMy_string;
     
-    return pVector->size;
+    while(pVector->data[i] != '\0')
+    {
+        stringLength++;
+        i++;
+    }
+    
+    return stringLength;
 }
 
 int my_string_compare(MY_STRING hLeft_string, MY_STRING hRight_string)
@@ -92,4 +108,25 @@ int my_string_compare(MY_STRING hLeft_string, MY_STRING hRight_string)
             return 2;
     }
     return -1;
+}
+
+Status my_string_extraction(MY_STRING hMy_string, FILE* fp)
+{
+    Vector* pVector = (Vector*)hMy_string;
+    
+    while(fscanf(fp, "%s", pVector->data) != EOF)
+    {
+        
+        return SUCCESS;
+    }
+    return FAILURE;
+}
+
+Status my_string_insertion(MY_STRING hMy_string, FILE* fp)
+{
+    Vector* pVector = (Vector*)hMy_string;
+    
+    fprintf(fp, "%s", pVector->data);
+    
+    return SUCCESS;
 }
