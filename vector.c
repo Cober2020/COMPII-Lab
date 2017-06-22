@@ -98,27 +98,20 @@ Status vector_update(Vector* pVector, int index, int item)
 
 Status vector_resize(Vector* pVector)
 {
-    Vector* pTemp = (Vector*)malloc(sizeof(Vector));
-    if(pTemp!= NULL)
+    char* pTemp = (char*) malloc(sizeof(char)* pVector->capacity * 2);
+    
+    if (pTemp == NULL)
     {
-        pTemp->size = pVector->size;
-        pTemp->capacity = pVector->capacity*2;
-        pTemp->data = malloc(sizeof(char)*pVector->capacity);
-        if(pTemp->data == NULL)
-            return FAILURE;
-        
-        int i = 0;
-        
-        while(pVector->data[i] != '\0')
-        {
-            pTemp->data[i] = pVector->data[i];
-            i++;
-        }
-        
-        pVector = pTemp;
-        free(pTemp->data);
-        free(pTemp);
-        return SUCCESS;
+        return FAILURE;
     }
-    return FAILURE;
+    for (int i = 0; i < pVector->size; i++)
+    {
+        pTemp[i] = pVector->data[i];
+    }
+    free(pVector->data);
+    pVector->data = pTemp;
+    pVector->capacity *= 2;
+    return SUCCESS;
 }
+
+

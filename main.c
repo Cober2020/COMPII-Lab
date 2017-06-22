@@ -10,24 +10,50 @@
 
 int main(int argc, const char * argv[])
 {
-    MY_STRING hMy_string = NULL;
-    FILE* fp;
+    MY_STRING hMy_string1 = NULL;
     
-    hMy_string = my_string_init_default();
-    fp = fopen("dictionary.txt", "r");
+    MY_STRING hMy_string2 = NULL;
     
-    while(my_string_extraction(hMy_string, fp))
-    {
-        if(my_string_get_size(hMy_string)==5)
-        {
-        my_string_insertion(hMy_string, stdout);
-        printf("\n");
-        }
-    }
+    hMy_string1 = my_string_init_c_string("Z");
     
+    hMy_string2 = my_string_init_c_string("H");
     
-    my_string_destroy(&hMy_string);
-    fclose(fp);
+    my_string_print(hMy_string1);
+    printf("\n");
+    
+    my_string_push_back(hMy_string1, 'o');
+    my_string_push_back(hMy_string1, 'e');
+    
+    my_string_print(hMy_string1);
+    printf("\n");
+    
+    my_string_push_back(hMy_string2, 'i');
+    my_string_push_back(hMy_string2, 'l');
+    my_string_push_back(hMy_string2, 'l');
+    my_string_push_back(hMy_string2, 'y');
+    
+    my_string_concat(hMy_string1, hMy_string2);
+    
+    my_string_print(hMy_string1);
+    printf("\n");
+    my_string_print(hMy_string2);
+    printf("\n");
+    
+    MY_STRING hMy_string3 = NULL;
+    
+    hMy_string3 = my_string_init_default();
+    
+    int res;
+    
+    res = my_string_empty(hMy_string3);
+    if(res == 1)
+        printf("String is empty\n");
+    else if(res == 0)
+        printf("String is full\n");
+    
+    my_string_destroy(&hMy_string1);
+    my_string_destroy(&hMy_string2);
+    my_string_destroy(&hMy_string3);
     
     return 0;
 }
