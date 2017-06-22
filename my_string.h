@@ -29,4 +29,16 @@ Status my_string_extraction(MY_STRING hMy_string, FILE* fp);
 
 Status my_string_insertion(MY_STRING hMy_string, FILE* fp);
 
+Status my_string_push_back(MY_STRING hMy_string, char item);
+
+Status my_string_pop_back(MY_STRING hMy_string);
+
+char* my_string_at(MY_STRING hMy_string, int index);
+
+Status my_string_concat(MY_STRING hResult, MY_STRING hAppend);
+
+Boolean my_string_empty(MY_STRING hMy_string);
+
+void my_string_print(MY_STRING hMy_string);
+
 #endif /* MY_STRING_h */

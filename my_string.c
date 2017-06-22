@@ -130,3 +130,84 @@ Status my_string_insertion(MY_STRING hMy_string, FILE* fp)
     
     return SUCCESS;
 }
+
+Status my_string_push_back(MY_STRING hMy_string, char item)
+{
+    Vector* pVector = (Vector*) hMy_string;
+    
+    if(pVector->size == pVector->capacity)
+    {
+        if(!vector_resize(pVector))
+        {
+            return FAILURE;
+        }
+    }
+    
+    pVector->data[pVector->size] = item;
+    pVector->size += 1;
+    
+    return SUCCESS;
+}
+
+Status my_string_pop_back(MY_STRING hMy_string)
+{
+    Vector* pVector = (Vector*)hMy_string;
+    
+    if(pVector->size == 0)
+        return FAILURE;
+    
+    pVector->size -= 1;
+    
+    return SUCCESS;
+}
+
+char* my_string_at(MY_STRING hMy_string, int index)
+{
+    Vector* pVector = (Vector*)hMy_string;
+    
+    if(pVector->size<index)
+        return FAILURE;
+    
+    return &pVector->data[index];
+}
+
+Status my_string_concat(MY_STRING hResult, MY_STRING hAppend)
+{
+    Vector* pResult = (Vector*)hResult;
+    Vector* pAppend = (Vector*)hAppend;
+    
+    while(pResult->size + pAppend->size > pResult->capacity)
+    {
+        vector_resize(pResult);
+    }
+    
+    int i = 0;
+    int pSize = pResult->size;
+    
+    while(i < pAppend->size)
+    {
+        vector_insertion(pResult, pSize + i, pAppend->data[i]);
+        i+=1;
+    }
+    
+    return SUCCESS;
+}
+
+Boolean my_string_empty(MY_STRING hMy_string)
+{
+    Vector* pVector = (Vector*)hMy_string;
+    
+    if(pVector->size == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void my_string_print(MY_STRING hMy_string)
+{
+    Vector* pVector = (Vector*)hMy_string;
+    
+    vector_traverse(pVector);
+    
+    return;
+}
