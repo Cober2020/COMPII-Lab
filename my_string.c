@@ -85,6 +85,9 @@ int my_string_compare(MY_STRING hLeft_string, MY_STRING hRight_string)
     
     int i = 0;
     
+    if(pLeft_string == NULL || pRight_string == NULL)
+        return -1;
+    
     if(pLeft_string->data[i] > pRight_string->data[i])
         return 2;
     else if(pLeft_string->data[i] < pRight_string->data[i])
@@ -178,7 +181,10 @@ Status my_string_concat(MY_STRING hResult, MY_STRING hAppend)
     
     while(pResult->size + pAppend->size > pResult->capacity)
     {
-        vector_resize(pResult);
+        if(!vector_resize(pResult))
+        {
+            return FAILURE;
+        }
     }
     
     int i = 0;

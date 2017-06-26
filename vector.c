@@ -20,7 +20,7 @@ Vector* vector_init_default(void)
     if(pVector != NULL)
     {
         pVector->size = 0;
-        pVector->capacity = 7;
+        pVector->capacity = 1;
         pVector->data = malloc(sizeof(char)*pVector->capacity);
         if(pVector->data == NULL)
             return NULL;
